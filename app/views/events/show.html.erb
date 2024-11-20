@@ -1,0 +1,72 @@
+<h1 class="text-white text-2xl text-center my-4">
+  <%= @event.title %>
+</h1>
+
+<div class="text-white text-center">
+  <p>
+    <strong>Lieu:</strong> <%= @event.location %>
+  </p>
+  <p>
+    <strong>Début:</strong> <%= @event.start_time %>
+  </p>
+  <p>
+    <strong>Statut:</strong> <%= @event.privacy %>
+  </p>
+</div>
+
+<%= link_to 'Modifier', edit_event_path(@event), class: "bg-blue-500 text-white p-2 rounded" %>
+<%= link_to 'Supprimer', event_path(@event),
+  data: { turbo_method: :delete,
+          alert: "Êtes-vous sûr de vouloir supprimer cet événement?"
+    },
+  class: "bg-red-500 text-white p-2 rounded" %>
+
+
+<section id="teams-container">
+
+  <div class="grid grid-cols-2 gap-4">
+
+    <div id="team_1" class="bg-blue-800 border-blue-600 rounded">
+      <h2 class="text-white text-center text-2xl">
+        <%= @team_1.name %>
+      </h2>
+      <ul>
+        <% @team_1.players.each do |player| %>
+          <li class="text-white">
+            <%= player.user.email %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div id="team_2" class="bg-red-800 border-red-600 rounded">
+      <h2 class="text-white text-center text-2xl">
+        <%= @team_2.name %>
+      </h2>
+      <ul>
+        <% @team_2.players.each do |player| %>
+          <li class="text-white">
+            <%= player.user.email %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+  </div>
+
+  <div id="bench" class="bg-gray-800 border-gray-600 rounded">
+
+    <h2 class="text-white text-center text-2xl">
+      Sur le Banc
+    </h2>
+
+    <ul>
+      <% @bench.players.each do |player| %>
+        <li class="text-white">
+          <%= player.user.email %>
+        </li>
+      <% end %>
+    </ul>
+
+  </div>
+</section>
