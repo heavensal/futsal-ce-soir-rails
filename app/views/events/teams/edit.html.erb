@@ -1,7 +1,16 @@
-<div>
-  <%= form_with model: @team do |form| %>
-    <%= form.label :name, "Nom de l'équipe" %>
-    <%= form.text_field :name %>
-    <%= form.submit %>
+<h1 class="text-white text-2xl text-center my-4">
+  Modifier l'équipe
+</h1>
+
+<div class="w-full max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg">
+  <%= form_with model: @team, html: { class: "w-full" } do |form| %>
+    <div class="mb-4">
+      <%= form.label :name, "Nom de l'équipe", class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.text_field :name, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    </div>
+
+    <div class="flex items-center justify-between">
+      <%= form.submit "Enregistrer", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+    </div>
   <% end %>
 </div>
