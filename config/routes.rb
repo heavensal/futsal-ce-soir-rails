@@ -17,6 +17,11 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions', confirmations: 'users/confirmations', passwords: 'users/passwords', unlocks: 'users/unlocks' }
 
   resources :events do
-    resources :teams, only: [ :edit, :update ]
+    resources :teams, only: [ :edit, :update ] do
+      resources :players, only: [ :update ]
+    end
   end
+
+  resources :players, only: [ :destroy ]
+
 end

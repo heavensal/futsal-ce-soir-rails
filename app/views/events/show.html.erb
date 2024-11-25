@@ -43,13 +43,20 @@
 
 
 
-<section id="teams-container" class="my-3">
+<section id="teams-container" class="my-3 px-6">
 
   <div class="grid grid-cols-4 gap-4">
 
-    <%= render 'events/components/teams/team-1', team: @team_1, event: @event %>
-    <%= render 'events/components/teams/team-2' %>
-    <%= render 'events/components/teams/bench' %>
+    <%= render 'events/components/teams/team-1', team: @team_1, event: @event, player: current_user %>
+    <%= render 'events/components/teams/team-2', team: @team_2, event: @event, player: current_user %>
+    <%= render 'events/components/teams/bench', team: @bench, event: @event, player: current_user %>
+
+
+<%# button pour quitter l'équipe %>
+    <div class="flex justify-center items-center">
+      <%= link_to "Quitter le footsalle", "#", class: "bg-red-500 text-center p-2 rounded" %>
+    </div>
+
 
   </div>
 
