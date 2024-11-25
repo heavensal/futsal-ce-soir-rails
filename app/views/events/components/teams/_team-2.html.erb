@@ -1,0 +1,15 @@
+<%# app/views/events/components/teams/_team-2.html.erb %>
+
+<div class="bg-[#1E1E1E] rounded-md col-start-3 col-span-2">
+
+  <h2 class="py-2 text-center bg-blue-950 text-xl rounded-t-md">
+    <%= @team_2.name %> <%= link_to '🖍️', edit_event_team_path([@event, @team_2]) %>
+  </h2>
+
+  <ul class="space-y-1 py-4 px-16">
+    <% @team_2.players.each do |player| %>
+      <%= render 'events/components/teams/players/player-1', player: player %>
+    <% end %>
+  </ul>
+
+</div>

@@ -1,0 +1,7 @@
+<div>
+  <%= form_with model: [@event, @team] do |form| %>
+    <%= form.label :name, "Nom de l'équipe" %>
+    <%= form.text_field :name %>
+    <%= form.submit %>
+  <% end %>
+</div>

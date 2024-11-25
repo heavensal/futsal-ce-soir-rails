@@ -1,6 +1,6 @@
 class Event < ApplicationRecord
   belongs_to :user
-  has_many :players, through: :teams, dependent: :destroy
+  has_many :players, dependent: :destroy
   has_many :teams, dependent: :destroy
 
   validates :user_id, presence: true

@@ -1,9 +1,12 @@
 class Events::TeamsController < ApplicationController
-  before_action :set_team, only: [ :edit, :update ]
   def edit
+    @event = Event.find(params[:event_id])
+    @team = Team.find(params[:id])
   end
 
   def update
+    @event = Event.find(params[:event_id])
+    @team = Team.find(params[:id])
     if @team.update(team_params)
       redirect_to event_path(@team.event), notice: "L'équipe a bien été modifiée"
     else
@@ -15,9 +18,5 @@ class Events::TeamsController < ApplicationController
 
   def team_params
     params.require(:team).permit(:name)
-  end
-
-  def set_team
-    @team = Team.find(params[:id])
   end
 end
