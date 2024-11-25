@@ -2,13 +2,17 @@
 
 <div class="bg-[#1E1E1E] rounded-md col-start-1 col-span-2">
   <h2 class="py-2 text-center bg-red-950 text-xl rounded-t-md">
-    <%= @team_1.name %> <%= link_to '🖍️', edit_event_team_path([@event, @team_1]) %>
+    <%= team.name %> <%= link_to '🖍️', edit_event_team_path(event, team) %>
   </h2>
 
   <ul class="space-y-1 py-4 px-16">
-    <% @team_1.players.each do |player| %>
+    <% team.players.each do |player| %>
       <%= render 'events/components/teams/players/player-1', player: player %>
     <% end %>
+
+    <li class="">
+      <%= link_to 'Rejoindre', "#", class:"text-yellow-700 my-4 border-2 border-dashed border-yellow-700 hover:border-yellow-600 hover:duration-150 transition px-4 py-2 rounded-md w-full block text-center" %>
+    </li>
   </ul>
 
 </div>

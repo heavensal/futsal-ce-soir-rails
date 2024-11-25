@@ -1,0 +1,75 @@
+<%= render 'layouts/components/title/h1', title: "Modifier le profil" %>
+
+<div class="mb-3">
+  <%= link_to "Retour", :back %>
+</div>
+
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field mb-2">
+    <%= f.label :first_name, "Prénom", class: "block text-gray-500 text-sm font-bold" %>
+    <%= f.text_field :first_name, autocomplete: "first-name", class: "shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-700 leading-tight focus:duration-150 transition focus:outline-none focus:shadow-outline" %>
+  </div>
+
+  <div class="field mb-2">
+    <%= f.label :last_name, "Nom", class: "block text-gray-500 text-sm font-bold" %>
+    <%= f.text_field :last_name, autocomplete: "last-name", class: "shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-700 leading-tight focus:duration-150 transition focus:outline-none focus:shadow-outline" %>
+  </div>
+
+  <div class="field mb-2">
+    <%= f.label :username, "Pseudo", class: "block text-gray-500 text-sm font-bold" %>
+    <%= f.text_field :username, disabled: true, class: "shadow appearance-none border rounded w-full py-2 px-3 text-slate-400 bg-gray-500 leading-tight focus:duration-150 transition focus:outline-none focus:shadow-outline" %>
+  </div>
+
+  <div class="field mb-2">
+    <%= f.label :phone_number, "Portable", class: "block text-gray-500 text-sm font-bold" %>
+    <%= f.phone_field :phone_number, autocomplete: "phone-number", class: "shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-700 leading-tight focus:duration-150 transition focus:outline-none focus:shadow-outline" %>
+  </div>
+
+  <div class="field mb-2">
+    <%= f.label :email, class: "block text-gray-500 text-sm font-bold" %>
+    <%= f.email_field :email, autocomplete: "email", class: "shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-700 leading-tight focus:duration-150 transition focus:outline-none focus:shadow-outline" %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field mb-2">
+    <div class="text-gray-500 text-sm">
+      <%= f.label :current_password, "Mot de passe actuel", class: "font-bold" %> <i>(Veuillez rentrer votre mot de passe actuel pour le modifier)</i><br />
+    </div>
+    <%= f.password_field :current_password, autocomplete: "current-password", class: "shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-700 leading-tight focus:duration-150 transition focus:outline-none focus:shadow-outline" %>
+  </div>
+
+  <div class="field mb-2">
+    <div class="text-gray-500 text-sm">
+      <%= f.label :password, "Changer de Mot de passe", class: "font-bold" %>
+      <i>(Laisser vide si vous ne souhaiter pas le modifier)</i>
+    </div>
+    <%= f.password_field :password, autocomplete: "new-password", class: "shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-700 leading-tight focus:duration-150 transition focus:outline-none focus:shadow-outline" %>
+    <% if @minimum_password_length %>
+      <br />
+      <em class="text-gray-500 text-sm">Votre mot de passe doit comporter au moins <%= @minimum_password_length %> caractères</em>
+    <% end %>
+  </div>
+
+  <div class="field mb-2">
+    <%= f.label :password_confirmation, "Confirmer votre nouveau mot de passe", class: "text-gray-500 text-sm font-bold" %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-700 leading-tight focus:duration-150 transition focus:outline-none focus:shadow-outline"  %>
+  </div>
+
+
+  <div class="actions text-center">
+    <%= f.submit "Modifier les informations", class: "bg-yellow-700 hover:bg-yellow-600 hover:duration-150 transition px-4 py-2 rounded-md cursor-pointer " %>
+  </div>
+<% end %>
+
+<div class="text-center my-12 space-y-4">
+  <p>
+    Vous pouvez supprimer votre compte, mais attention, cette action est irréversible.
+  </p>
+  <%= button_to "Supprimer mon compte", registration_path(resource_name), data: { confirm: "Êtes-vous sûr de vouloir supprimer votre compte ?", turbo_confirm: "Êtes-vous sûr de vouloir supprimer votre compte ?" }, method: :delete, class: "bg-red-800 hover:bg-red-700 transition hover:duration-150 p-2 rounded-md cursor-pointer" %>
+</div>

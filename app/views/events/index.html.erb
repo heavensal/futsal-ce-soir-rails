@@ -7,35 +7,7 @@
 <section class="grid grid-cols-2 gap-4">
   <% @events.each do |event| %>
 
-    <%= link_to event_path(event), class:"rounded-md shadow-gray-700 shadow-sm" do %>
-      <div id="<%= event.id %>">
-
-        <h2 class="text-white text-center text-xl bg-green-950 border-green-950 rounded-t-md py-2">
-          <%= event.title %>
-        </h2>
-
-        <ul class="p-4">
-
-          <li>
-            <%= event.location %>
-          </li>
-
-          <li>
-            <%= event.start_time %>
-          </li>
-
-          <li class="text-end text-green-900 text-xl flex justify-end items-center gap-x-2">
-            <%= render 'layouts/svg/icons/players' %>
-            <div>
-              <%= event.players.count %> / <%= event.number_of_players %>
-            </div>
-          </li>
-
-        </ul>
-
-      </div>
-
-    <% end %>
+    <%= render 'events/components/event/event-card', event: event %>
 
   <% end %>
 

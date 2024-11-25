@@ -1,9 +1,7 @@
-
-<h1 class="text-white text-2xl text-center my-4">
-  Modifier un événement
-</h1>
+<%= render 'layouts/components/title/h1', title: "Modifier un événement" %>
 
 <%= form_with model: @event, html: { class: "w-full max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg" } do |form| %>
+
   <div class="mb-4">
     <%= form.label :title, "Titre de l'événement", class: "block text-gray-700 text-sm font-bold mb-2" %>
     <%= form.text_field :title, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
@@ -14,10 +12,12 @@
     <%= form.text_field :location, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
   </div>
 
+
   <div class="mb-4">
     <%= form.label :start_time, "Début de l'événement", class: "block text-gray-700 text-sm font-bold mb-2" %>
-    <%= form.datetime_select :start_time, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+    <%= form.datetime_field :start_time, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
   </div>
+
 
   <div class="mb-4">
     <%= form.label :privacy, "Privé", class: "block text-gray-700 text-sm font-bold mb-2" %>
@@ -30,7 +30,19 @@
     </div>
   </div>
 
-  <div class="flex items-center justify-between">
-    <%= form.submit "Modifier", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+  <div class="mb-4">
+    <%= form.label :price_per_player, "Prix par joueur", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.number_field :price_per_player, step: '1', min: '0', value: sprintf('%.2f', @event.price_per_player), class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
   </div>
+
+  <div class="mb-4">
+    <%= form.label :number_of_players, "Nombre de joueurs", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.number_field :number_of_players, step: '1', min: '2', class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+  </div>
+
+  <div class="flex items-center justify-between">
+    <%= link_to 'Annuler', :back, class: "bg-gray-950 hover:bg-gray-800 transition hover:duration-150 py-2 px-4 rounded " %>
+    <%= form.submit "Modifier", class: "bg-blue-500 hover:bg-blue-700 transition hover:duration-150 text-white font-bold py-2 px-4 rounded cursor-pointer" %>
+  </div>
+
 <% end %>

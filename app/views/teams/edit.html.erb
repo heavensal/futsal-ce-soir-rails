@@ -1,7 +1,17 @@
-<div>
+<%= render 'layouts/components/title/h1', title: "Modifier une équipe" %>
+
+<section class="px-6">
   <%= form_with model: [@event, @team] do |form| %>
-    <%= form.label :name, "Nom de l'équipe" %>
-    <%= form.text_field :name %>
-    <%= form.submit %>
+
+    <div class="mb-4">
+      <%= form.label :name, "Nom de l'équipe", class: "block text-gray-500 text-sm font-bold mb-2" %>
+      <%= form.text_field :name, class: "shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-700 leading-tight focus:duration-150 transition focus:outline-none focus:shadow-outline" %>
+    </div>
+
+    <div class="flex items-center justify-between">
+      <%= link_to 'Annuler', :back, class: "bg-gray-950 hover:bg-gray-800 transition hover:duration-150 py-2 px-4 rounded " %>
+      <%= form.submit "Modifier", class: "bg-blue-500 hover:bg-blue-700 transition hover:duration-150 text-white font-bold py-2 px-4 rounded cursor-pointer" %>
+    </div>
+
   <% end %>
-</div>
+</section>

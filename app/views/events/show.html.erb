@@ -1,16 +1,35 @@
 <%= render 'layouts/components/title/h1', title: @event.title %>
 
-<div class="text-white text-center my-3">
-  <p>
-    <strong>Lieu:</strong> <%= @event.location %>
+<div class=" text-center my-3">
+
+  <p class="flex justify-center">
+    <%= render 'layouts/svg/icons/location' %>
+    <%= @event.location %>
   </p>
-  <p>
-    <strong>Début:</strong> <%= @event.start_time %> <%= @event.start_time.strftime("%d %B %Y") %> <br>
+
+  <p class="flex justify-center">
+    <%= render 'layouts/svg/icons/start-time' %>
+    <%= @event.start_time.strftime("%d %B %Y") %>
+    <br>
     <%= @event.start_time.strftime("%H:%M") %>
   </p>
-  <p>
-    <strong>Statut:</strong> <%= @event.privacy %>
+
+  <p class="flex justify-center">
+    <%= render 'layouts/svg/icons/lock' %>
+    <%= @event.privacy %>
   </p>
+
+  <p class="flex justify-center">
+    <%= render 'layouts/svg/icons/price' %>
+    <%= number_with_precision(@event.price_per_player, precision: 2) %> par joueur
+  </p>
+
+  <p class="flex justify-center">
+    <%= render 'layouts/svg/icons/players' %>
+    <%= @event.players.count %> / <%= @event.number_of_players %>
+  </p>
+
+
 </div>
 
 <div class="text-center">
@@ -28,7 +47,7 @@
 
   <div class="grid grid-cols-4 gap-4">
 
-    <%= render 'events/components/teams/team-1' %>
+    <%= render 'events/components/teams/team-1', team: @team_1, event: @event %>
     <%= render 'events/components/teams/team-2' %>
     <%= render 'events/components/teams/bench' %>
 

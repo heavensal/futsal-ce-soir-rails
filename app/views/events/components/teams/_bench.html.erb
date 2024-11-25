@@ -10,6 +10,10 @@
     <% @bench.players.each do |player| %>
       <%= render 'events/components/teams/players/substitute', player: player %>
     <% end %>
+
+    <li class="">
+      <%= link_to 'Rejoindre', "#", class:"text-yellow-700 my-4 border-2 border-dashed border-yellow-700 hover:border-yellow-600 hover:duration-150 transition px-4 py-2 rounded-md w-full block text-center" %>
+    </li>
   </ul>
 
 </div>
