@@ -8,6 +8,8 @@ class EventsController < ApplicationController
     @team_1 = @event.teams.first
     @team_2 = @event.teams.second
     @bench = @event.teams.third
+
+    @player = Player.find_by(user: current_user, event: @event)
   end
 
   def new

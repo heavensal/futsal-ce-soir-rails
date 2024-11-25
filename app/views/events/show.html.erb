@@ -34,16 +34,11 @@
 
 <div class="text-center">
   <%= link_to 'Modifier', edit_event_path(@event), class: "bg-blue-500 text-white p-2 rounded" %>
-  <%= link_to 'Supprimer', event_path(@event),
-    data: { turbo_method: :delete,
-            alert: "Êtes-vous sûr de vouloir supprimer cet événement?"
-      },
-    class: "bg-red-500 text-white p-2 rounded" %>
 </div>
 
 
 
-<section id="teams-container" class="my-3 px-6">
+<section id="teams-container" class="my-3 px-5">
 
   <div class="grid grid-cols-4 gap-4">
 
@@ -52,12 +47,27 @@
     <%= render 'events/components/teams/bench', team: @bench, event: @event, player: current_user %>
 
 
-<%# button pour quitter l'équipe %>
-    <div class="flex justify-center items-center">
-      <%= link_to "Quitter le footsalle", "#", class: "bg-red-500 text-center p-2 rounded" %>
-    </div>
 
 
   </div>
 
+<%# button pour quitter l'événement %>
+<% if @player %>
+  <div class="col-start-2 col-span-2 text-center py-4">
+      <%= link_to "Ne pas participer", player_path(@player), data: { turbo_method: :delete,
+              alert: "Êtes-vous sûr de vouloir quitter la partie?"
+        }, class: "bg-red-900 hover:bg-red-800 hover:duration-150 transition p-2 rounded" %>
+  </div>
+<% end %>
+
 </section>
+
+<%# button pour supprimer l'événement %>
+
+<div class="text-center py-4">
+  <%= link_to "Supprimer l'événement", event_path(@event),
+      data: { turbo_method: :delete,
+              alert: "Êtes-vous sûr de vouloir supprimer cet événement?"
+        },
+      class: "bg-red-900 hover:bg-red-800 hover:duration-150 transition p-2 rounded" %>
+</div>

@@ -15,4 +15,14 @@ class PlayersController < ApplicationController
       render :edit, alert: "Erreur lors de la modification du joueur."
     end
   end
+
+  def destroy
+    @player = Player.find(params[:id])
+    @event = @player.event
+    if @player.destroy
+      redirect_to event_path(@event), notice: "Vous avez bien quitté l'équipe."
+    else
+      redirect_to event_path(@event), alert: "Erreur lors de la sortie de l'équipe."
+    end
+  end
 end
