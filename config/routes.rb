@@ -24,4 +24,10 @@ Rails.application.routes.draw do
 
   resources :players, only: [ :destroy ]
 
+  resources :friendships, only: [ :index, :destroy ] do
+    post :send_request
+    patch :accept_request
+    patch :decline_request
+    patch :block_request
+  end
 end

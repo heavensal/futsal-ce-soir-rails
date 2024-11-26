@@ -1,0 +1,16 @@
+<%= render 'layouts/components/title/h1', title: "Mes Amis" %>
+
+<section class="my-3">
+  <div class="grid grid-cols-1 gap-4">
+    <% @friendships.each do |friendship| %>
+      <div class="flex items-center justify-between bg-gray-800 p-2 rounded">
+        <div>
+          <%= friendship.friend.username %>
+        </div>
+        <div>
+          <%= link_to "Supprimer", friendship_path(friendship), method: :delete, data: { turbo_confirm: "Êtes-vous sûr de vouloir supprimer cet ami?" }, class: "bg-red-900 hover:bg-red-800 hover:duration-150 transition p-2 rounded" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>
