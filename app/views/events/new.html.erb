@@ -3,30 +3,30 @@
 <%= render 'layouts/components/title/h1', title: "Créer un footsalle" %>
 
 <section class="my-3">
-  <%= form_with model: @event do |form| %>
+  <%= form_with model: @event, class: "snap-y scroll-smooth" do |form| %>
 
-    <div class="min-h-lvh flex items-center justify-center">
+    <div class="min-h-lvh flex items-center justify-center snap-always snap-start">
       <div>
         <%= form.label :title, "Titre de l'événement", class: "block text-gray-500 text-sm font-bold mb-2" %>
         <%= form.text_field :title, placeholder: "footsalle par Adam#1511", class: "shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-700 leading-tight focus:duration-150 transition focus:outline-none focus:shadow-outline" %>
       </div>
     </div>
 
-    <div class="min-h-lvh flex items-center justify-center">
+    <div class="min-h-lvh flex items-center justify-center snap-always snap-start">
       <div>
         <%= form.label :location, "Lieu", class: "block text-gray-500 text-sm font-bold mb-2" %>
         <%= form.text_field :location, placeholder:"13 By Puma", class: "shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-700 leading-tight focus:duration-150 transition focus:outline-none focus:shadow-outline" %>
       </div>
     </div>
 
-    <div class="min-h-lvh flex items-center justify-center">
+    <div class="min-h-lvh flex items-center justify-center snap-always snap-start">
       <div class="">
         <%= form.label :start_time, "Début de l'événement", class: "block text-gray-500 text-sm font-bold mb-2" %>
         <%= form.datetime_field :start_time, class: "shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-700 leading-tight focus:duration-150 transition focus:outline-none focus:shadow-outline" %>
       </div>
     </div>
 
-    <div class="min-h-lvh flex items-center justify-center">
+    <div class="min-h-lvh flex items-center justify-center snap-always snap-start">
       <div class="mb-2">
       <%= form.label :privacy, "Accès au footsalle", class: "block text-gray-700 text-sm font-bold mb-2" %>
 
@@ -40,7 +40,21 @@
       </div>
     </div>
 
-    <div class="text-center">
+    <div class="min-h-lvh flex items-center justify-center snap-always snap-start">
+      <div>
+        <%= form.label :number_of_players, "Nombre de joueurs", class: "block text-gray-500 text-sm font-bold mb-2" %>
+        <%= form.number_field :price_per_player, step: '1', min: '2', placeholder: 10, class: "shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-700 leading-tight focus:duration-150 transition focus:outline-none focus:shadow-outline" %>
+      </div>
+    </div>
+
+    <div class="min-h-lvh flex items-center justify-center snap-always snap-start">
+      <div>
+        <%= form.label :price_per_player, "Prix par joueur", class: "block text-gray-500 text-sm font-bold mb-2" %>
+        <%= form.number_field :price_per_player, step: '1', min: '0', placeholder: sprintf('%.2f', 10.00), class: "shadow appearance-none border rounded w-full py-2 px-3 text-white bg-gray-700 leading-tight focus:duration-150 transition focus:outline-none focus:shadow-outline" %>
+      </div>
+    </div>
+
+    <div class="text-center snap-always snap-start">
       <%= form.submit "Créer", class: "bg-yellow-700 hover:bg-yellow-600 hover:duration-150 transition px-4 py-2 rounded-md cursor-pointer" %>
     </div>
 
