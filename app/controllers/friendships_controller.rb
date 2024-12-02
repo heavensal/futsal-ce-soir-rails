@@ -4,24 +4,31 @@ class FriendshipsController < ApplicationController
 
   def index
     @user = current_user
-    @friendships = Friendship.where(user: @user)
+    # Requête pour récupérer les identifiants des utilisateurs avec lesquels current_user a une relation d'amitié
+
+    @friends = @user.friends
+    @not_friends = @user.not_friends
+
+    @pending_friendships = @user.pending_friendships
+    @pending_requests_sent = @user.pending_friendships_sent
+    # @blocked_requests = Friendship.where(user: @user, status: "blocked")
   end
 
   def send_request
     @user = current_user
-    @friend = User.find(params[:friend_id])
+    @friend = User.find(params[:user_id])
     @friendship = Friendship.new(user: @user, friend_of: @friend)
     if @friendship.save
-      flash[:notice] = "Une demande d'ami a été envoyée à #{@friend.first_name} #{@friend.last_name}"
+      redirect_to friendships_path, notice: "Une demande d'ami a été envoyée à #{@friend.first_name} #{@friend.last_name}"
     else
-      flash[:alert] = "La demande d'ami n'a pas pu être envoyée"
+      redirect_to friendships_path, alert: "La demande d'ami n'a pas pu être envoyée"
     end
   end
 
   def accept_request
     @friendship.status = "accepted"
     if @friendship.save
-      flash[:notice] = "La demande d'ami a été acceptée"
+      redirect_to friendships_path, notice: "La demande d'ami a été acceptée"
     else
       flash[:alert] = "La demande d'ami n'a pas pu être acceptée"
     end
@@ -30,9 +37,9 @@ class FriendshipsController < ApplicationController
   def decline_request
     @friendship.status = "declined"
     if @friendship.save
-      flash[:notice] = "La demande d'ami a été refusée"
+      redirect_to friendships_path, notice: "La demande d'ami a été refusée"
     else
-      flash[:alert] = "La demande d'ami n'a pas pu être refusée"
+      redirect_to friendships_path, alert: "Erreur lors du refus de la demande d'ami"
     end
   end
 
@@ -46,10 +53,11 @@ class FriendshipsController < ApplicationController
   end
 
   def destroy
+    raise
     if @friendship.destroy
-      flash[:notice] = "La demande d'ami a été supprimée"
+      redirect_to friendships_path, notice: "La demande d'ami a été supprimée"
     else
-      flash[:alert] = "La demande d'ami n'a pas pu être supprimée"
+      redirect_to friendships_path, alert: "La demande d'ami n'a pas pu être supprimée"
     end
   end
 

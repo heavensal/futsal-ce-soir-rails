@@ -1,14 +1,119 @@
 <%= render 'layouts/components/title/h1', title: "Mes Amis" %>
 
 <section class="my-3">
+
+  <h2 class="text-start">
+    Mes amis
+  </h2>
   <div class="grid grid-cols-1 gap-4">
-    <% @friendships.each do |friendship| %>
+    <% if @friends %>
+      <% @friends.each do |friend| %>
+        <div class="flex items-center justify-between bg-gray-800 p-2 rounded">
+          <div>
+            <%= friend.first_name %>
+          </div>
+          <div class="p-2">
+            <%= link_to "Supprimer", friendship_path(friend), data: { turbo_method: :delete,
+              turbo_confirm: "Êtes-vous sûr de vouloir supprimer cet ami?"
+            },
+              class: "bg-red-900 hover:bg-red-800 hover:duration-150 transition p-2 rounded" %>
+          </div>
+        </div>
+      <% end %>
+
+    <% else %>
+      <p class="text-center">
+        Vous n'avez pas encore d'amis.
+      </p>
+    <% end %>
+  </div>
+
+</section>
+
+<hr>
+
+<section class="my-3">
+
+  <h2 class="text-start">
+    Demandes envoyées
+  </h2>
+
+  <div class="grid grid-cols-1 gap-4">
+    <% if @pending_requests_sent %>
+      <% @pending_requests_sent.each do |request| %>
+        <div class="flex items-center justify-between bg-gray-800 p-2 rounded">
+          <div>
+            <%= request.friend_of.first_name %>
+          </div>
+          <div class="p-2">
+            <%= link_to "Annuler", friendship_path(request),
+              data: { turbo_method: :delete,
+              turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette demande d'ami?"
+            },
+              class: "bg-red-900 hover:bg-red-800 hover:duration-150 transition p-2 rounded" %>
+          </div>
+        </div>
+      <% end %>
+
+    <% else %>
+      <p class="text-center">
+        Vous n'avez pas encore envoyé de demande d'ami.
+      </p>
+    <% end %>
+  </div>
+
+</section>
+
+<hr>
+
+<section class="my-3">
+
+  <h2 class="text-start">
+    Demandes reçues
+  </h2>
+
+  <div class="grid grid-cols-1 gap-4">
+    <% if @pending_requests %>
+      <% @pending_requests.each do |request| %>
+        <div class="flex items-center justify-between bg-gray-800 p-2 rounded">
+          <div>
+            <%= request.user.first_name %>
+          </div>
+          <div>
+            <%= link_to "Refuser", decline_request_friendship_path(request),
+              data: { turbo_method: :patch,
+              turbo_confirm: "Êtes-vous sûr de vouloir refuser cette demande d'ami?"
+            },
+              class: "bg-red-900 hover:bg-red-800 hover:duration-150 transition p-2 rounded" %>
+          </div>
+        </div>
+      <% end %>
+
+    <% else %>
+      <p class="text-center">
+        Vous n'avez pas de demande d'ami en attente.
+      </p>
+    <% end %>
+  </div>
+
+</section>
+
+<hr>
+
+
+<section class="my-3">
+
+  <h2 class="text-start">
+    Tous Les utilisateurs
+  </h2>
+  <div class="grid grid-cols-1 gap-4">
+    <% @not_friends.each do |user| %>
       <div class="flex items-center justify-between bg-gray-800 p-2 rounded">
         <div>
-          <%= friendship.friend.username %>
+          <%= user.first_name %>
         </div>
-        <div>
-          <%= link_to "Supprimer", friendship_path(friendship), method: :delete, data: { turbo_confirm: "Êtes-vous sûr de vouloir supprimer cet ami?" }, class: "bg-red-900 hover:bg-red-800 hover:duration-150 transition p-2 rounded" %>
+        <div class="p-2">
+          <%= button_to "Ajouter", send_request_friendships_path(user_id: user.id), method: :post, class: "bg-green-900 hover:bg-green-800 hover:duration-150 transition p-2 rounded" %>
         </div>
       </div>
     <% end %>

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   root "events#index"
 
-  devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions', confirmations: 'users/confirmations', passwords: 'users/passwords', unlocks: 'users/unlocks' }
+  devise_for :users, controllers: { registrations: "users/registrations", sessions: "users/sessions", confirmations: "users/confirmations", passwords: "users/passwords", unlocks: "users/unlocks" }
 
   resources :events do
     resources :teams, only: [ :edit, :update ] do
@@ -25,9 +25,13 @@ Rails.application.routes.draw do
   resources :players, only: [ :destroy ]
 
   resources :friendships, only: [ :index, :destroy ] do
-    post :send_request
-    patch :accept_request
-    patch :decline_request
-    patch :block_request
+    collection do
+      post :send_request
+    end
+    member do
+      patch :accept_request
+      patch :decline_request
+      patch :block_request
+    end
   end
 end

@@ -1,0 +1,18 @@
+<%# app/views/layouts/components/notifications/_notice.html.erb %>
+
+<%# Notice %>
+<% if notice %>
+  <div id="notice" class="fixed bottom-4 inset-x-4 bg-green-800 shadow-md p-4 rounded-md">
+    <p class="text-center">
+      <%= notice %>
+    </p>
+  </div>
+
+<% elsif alert %>
+  <div id="alert" class="fixed bottom-4 inset-x-4 bg-red-800 shadow-md p-4 rounded-md">
+    <p class="text-center">
+      <%= alert %>
+    </p>
+  </div>
+
+<% end %>

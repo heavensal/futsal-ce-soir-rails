@@ -1,5 +1,4 @@
 class PlayersController < ApplicationController
-
   def update
     @event = Event.find(params[:event_id])
     @team = Team.find(params[:team_id])
