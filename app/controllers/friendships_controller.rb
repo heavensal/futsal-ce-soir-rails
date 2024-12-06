@@ -53,7 +53,6 @@ class FriendshipsController < ApplicationController
   end
 
   def destroy
-    raise
     if @friendship.destroy
       redirect_to friendships_path, notice: "La demande d'ami a été supprimée"
     else
